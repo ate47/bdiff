@@ -1,19 +1,4 @@
-#pragma once
-
-struct Instruction
-{
-	__int16 op;
-	unsigned __int16 mode;
-	unsigned int size;
-};
-
-struct DoubleInstruction
-{
-	Instruction instruction[2];
-};
-
-// dont use! Use the cast in Structs.h instead.
-unsigned char instructions_arr[256 * sizeof(DoubleInstruction)] =
+static unsigned char instructions_arr[256 * sizeof(DoubleInstruction)] =
 {
 	0x2 ,
 	0x0 ,
