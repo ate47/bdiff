@@ -99,6 +99,23 @@ size_t addr_decode(VcdState* vcd, size_t here, int mode)
     return address;
 }
 
+void memmove2(void* _dest, void* _src, size_t n)
+{
+	byte* dest{ (byte*)_dest };
+	byte* src{ (byte*)_src };
+
+	if (&dest[n] <= src || &src[n] <= dest)
+	{
+		memcpy(dest, src, n);
+		return; // no overlap
+	}
+
+	for (size_t i = 0; i < n; i++)
+	{
+		dest[i] = src[i];
+	}
+}
+
 bool bdiff_internal(diffInfo* s_diffInfo, 
     unsigned char* (__fastcall* loadSourceData)(diffInfo* s_diffInfo, size_t offset, size_t size),
     unsigned char* (__fastcall* loadPatchData)(diffInfo* s_diffInfo, size_t offset, size_t size, size_t* pOffset),
@@ -221,7 +238,7 @@ bool bdiff_internal(diffInfo* s_diffInfo,
                 {
                     v68 = (v72 - v71 + v70);
                 }
-                memcpy(v44, v68, size);
+                memmove2(v44, v68, size);
                 v44 += size;
                 v62 = oldIns;
                 continue;
