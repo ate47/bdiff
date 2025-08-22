@@ -136,6 +136,23 @@ namespace bdiff
         return address;
     }
 
+    void memmove2(void* _dest, void* _src, size_t n)
+    {
+        byte* dest{ (byte*)_dest };
+        byte* src{ (byte*)_src };
+
+        if (&dest[n] <= src || &src[n] <= dest)
+        {
+            std::memcpy(dest, src, n);
+            return; // no overlap
+        }
+
+        for (size_t i = 0; i < n; i++)
+        {
+            dest[i] = src[i];
+        }
+    }
+
     BDIFF_API bool bdiff_internal(diffInfo* s_diffInfo, 
         unsigned char* (__fastcall* loadSourceData)(void* s_diffInfo, size_t offset, size_t size),
         unsigned char* (__fastcall* loadPatchData)(void* s_diffInfo, size_t offset, size_t size, size_t* pOffset),
@@ -258,7 +275,7 @@ namespace bdiff
                     {
                         v68 = (v72 - v71 + v70);
                     }
-                    memcpy(v44, v68, size);
+                    memmove2(v44, v68, size);
                     v44 += size;
                     v62 = oldIns;
                     continue;
