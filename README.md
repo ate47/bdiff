@@ -1,3 +1,14 @@
+**ARCHIVED**
+
+I have switched to a custom implementation, I leave that here as an archive if someone wants to use it.
+
+[Link to the custom implementation in atian-cod-tools](https://github.com/ate47/atian-cod-tools/blob/main/src/acts/tools/ff/fastfile_bdiff.cpp)
+
+----
+
+
+
+
 # MWBDiff
 A modified implementation of VCDIFF (https://www.researchgate.net/publication/279639182_The_VCDIFF_Generic_Differencing_and_Compression_Data_Format) used by Modern Warfare 2019 and Modern Warfare 2 2022's FastFiles for data compression.
 
